@@ -11,5 +11,5 @@ int main()
 
 	cout << "lista" << endl;
 	add_to_list();
-	
+	fun3();
 }
