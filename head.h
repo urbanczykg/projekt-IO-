@@ -2,4 +2,5 @@
 #define _HEAD_H
 void list_of_files();
 void add_to_list();
+void fun3();
 #endif
