@@ -2,7 +2,8 @@
 #include "head.h"
 #include <list>
 #include <filesystem>
-
+#include <string>
+#include <functional>
 using namespace std;
 
 int main()
@@ -13,4 +14,5 @@ int main()
 	add_to_list();
 	relation();
 	relation2();
+	
 }
