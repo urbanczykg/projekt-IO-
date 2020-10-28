@@ -12,4 +12,5 @@ int main()
 	cout << "lista" << endl;
 	add_to_list();
 	relation();
+	relation2();
 }
