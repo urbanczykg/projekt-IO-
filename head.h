@@ -4,4 +4,5 @@ void list_of_files();
 void add_to_list();
 void relation();
 void relation2();
+void relation3();
 #endif
