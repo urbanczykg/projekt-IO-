@@ -14,5 +14,6 @@ int main()
 	add_to_list();
 	relation();
 	relation2();
+	relation3();
 	
 }
