@@ -210,3 +210,78 @@ void relation3()
 		waitKey(0);
 		*/
 	}
+void relation4()
+		{
+			map<string, vector<string>>mapa_przestrzen_nazw;
+			map<string, vector<string>>mapa_using;
+			cout << endl << "______________" << endl;
+			for (auto it = pliki.begin(); it != pliki.end(); it++)
+			{
+				ifstream plik(*it);
+
+				while (!plik.eof()) {
+					string linijka;
+					getline(plik, linijka);
+					///cout << linijka << endl;
+
+					string szukany;
+					size_t gdzie = linijka.find(szukany);
+					///NAMESPACE
+					if (linijka.find("namespace") != string::npos && linijka.find("using") == string::npos && linijka.find("find") == string::npos && linijka.find("cout") == string::npos)
+					{
+						gdzie += szukany.size();
+						string nazwa_pliku = linijka.substr(gdzie);
+
+						//cout << nazwa_pliku << endl;
+						mapa_przestrzen_nazw[*it].push_back(nazwa_pliku);
+
+					}
+
+					//USING NAMESPACE
+					if (linijka.find("namespace") != string::npos && linijka.find("find") == string::npos && linijka.find("cout") == string::npos)
+					{
+						gdzie += szukany.size();
+						string nazwa_pliku = linijka.substr(gdzie);
+						if (linijka.find(nazwa_pliku) != string::npos && linijka.find("using") != string::npos)
+						{
+							//cout << nazwa_pliku << endl;
+							mapa_using[*it].push_back(nazwa_pliku);
+						}
+					}
+					
+
+					
+
+				}
+
+			}
+			for (auto i = mapa_przestrzen_nazw.begin(); i != mapa_przestrzen_nazw.end(); i++) {
+				cout << "mapa namespace: " << endl;
+				if (i->first != "a.out") {
+					cout << i->first << "-> ";
+					for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+					{
+						cout << *ii << " ";
+
+
+					}
+
+				}
+				cout << endl;
+			}
+
+			for (auto i = mapa_using.begin(); i != mapa_using.end(); i++) {
+				cout << "mapa using namespace: " << endl;
+				if (i->first != "a.out") {
+					cout << i->first << "-> ";
+					for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+					{
+						cout << *ii << " ";
+
+
+					}
+
+				}
+				cout << endl;
+			}
+		}
