@@ -210,78 +210,85 @@ void relation3()
 		waitKey(0);
 		*/
 	}
-void relation4()
+void relation5()
+{
+
+	string* nm = new string[10];
+	string* unm = new string[10];
+
+	cout << endl << "______________" << endl;
+	for (auto it = pliki.begin(); it != pliki.end(); it++)
+	{
+		ifstream plik(*it);
+
+		while (!plik.eof())
 		{
-			map<string, vector<string>>mapa_przestrzen_nazw;
-			map<string, vector<string>>mapa_using;
-			cout << endl << "______________" << endl;
-			for (auto it = pliki.begin(); it != pliki.end(); it++)
-			{
-				ifstream plik(*it);
+			string linijka;
+			getline(plik, linijka);
 
-				while (!plik.eof()) {
-					string linijka;
-					getline(plik, linijka);
-					///cout << linijka << endl;
 
-					string szukany;
-					size_t gdzie = linijka.find(szukany);
-					///NAMESPACE
-					if (linijka.find("namespace") != string::npos && linijka.find("using") == string::npos && linijka.find("find") == string::npos && linijka.find("cout") == string::npos)
-					{
-						gdzie += szukany.size();
-						string nazwa_pliku = linijka.substr(gdzie);
 
-						//cout << nazwa_pliku << endl;
-						mapa_przestrzen_nazw[*it].push_back(nazwa_pliku);
+			string szukany;
+			size_t gdzie = linijka.find(szukany);
 
-					}
 
-					//USING NAMESPACE
-					if (linijka.find("namespace") != string::npos && linijka.find("find") == string::npos && linijka.find("cout") == string::npos)
-					{
-						gdzie += szukany.size();
-						string nazwa_pliku = linijka.substr(gdzie);
-						if (linijka.find(nazwa_pliku) != string::npos && linijka.find("using") != string::npos)
-						{
-							//cout << nazwa_pliku << endl;
-							mapa_using[*it].push_back(nazwa_pliku);
-						}
-					}
-					
+			for (int i = 0; i < 10; i++) {
+				if (linijka.find("namespace") != string::npos && linijka.find("{") != string::npos && linijka.find("find") == string::npos && linijka.find("cout") == string::npos)
+				{
+					gdzie += szukany.size();
+					string nazwa_pliku = linijka.substr(gdzie);
+					nm[i] = nazwa_pliku;
 
-					
 
 				}
 
-			}
-			for (auto i = mapa_przestrzen_nazw.begin(); i != mapa_przestrzen_nazw.end(); i++) {
-				cout << "mapa namespace: " << endl;
-				if (i->first != "a.out") {
-					cout << i->first << "-> ";
-					for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
-					{
-						cout << *ii << " ";
-
-
-					}
-
-				}
-				cout << endl;
-			}
-
-			for (auto i = mapa_using.begin(); i != mapa_using.end(); i++) {
-				cout << "mapa using namespace: " << endl;
-				if (i->first != "a.out") {
-					cout << i->first << "-> ";
-					for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
-					{
-						cout << *ii << " ";
-
-
-					}
-
-				}
-				cout << endl;
 			}
 		}
+	}
+	cout << endl << "______________" << endl;
+	for (auto it = pliki.begin(); it != pliki.end(); it++)
+	{
+		ifstream plik(*it);
+
+		while (!plik.eof())
+		{
+			string linijka1;
+			getline(plik, linijka1);
+
+
+			string szukany1;
+
+			size_t gdzie1 = linijka1.find(szukany1);
+
+			for (int i = 0; i < 10; i++)
+			{
+
+
+				if (linijka1.find("using") != string::npos && linijka1.find("namespace") != string::npos && linijka1.find("if") == string::npos && linijka1.find("//") == string::npos && linijka1.find("std") == string::npos )
+				{
+					gdzie1 += szukany1.size();
+					string nazwa_pliku1 = linijka1.substr(gdzie1);
+
+
+
+
+					unm[i] = nazwa_pliku1;
+
+
+
+				}
+
+			}
+		}
+	}
+
+	for (int i = 0; i < 1; i++)
+	{
+
+
+		cout << nm[i] << " -> " << unm[i] << endl;
+
+	}
+
+}
+
