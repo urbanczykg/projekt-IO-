@@ -30,12 +30,12 @@ namespace algorytm
 		relation2();
 		relation3();
 		std::cout << "XXXXXX" << std::endl;
-		relation4();
+		relation5();
 	
-		using namespace algorytm;
+		
 
 
-		liczba();	
+			
 		
 		return 0;
 	}
