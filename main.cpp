@@ -31,6 +31,22 @@ namespace algorytm
 		relation3();
 		std::cout << "XXXXXX" << std::endl;
 		relation5();
+		
+		std::cout << "Nastapi otworzenie grafu zależności plików" << std::endl;
+		char gp[50];
+		strcpy_s(gp, "graf_pliki.png");
+		system(gp);
+
+		std::cout << "Nastapi otworzenie grafu funkcji" << std::endl;
+		char gf[50];
+		strcpy_s(gf, "graf_funkcje.png");
+		system(gf);
+
+		std::cout << "Nastapi otworzenie grafu przestrzeni nazw" << std::endl;
+		char gn[50];
+		strcpy_s(gn, "graf_namespace.png");
+		system(gn);
+
 	
 		
 
