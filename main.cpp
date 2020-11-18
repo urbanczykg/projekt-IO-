@@ -32,7 +32,7 @@ namespace algorytm
 		std::cout << "XXXXXX" << std::endl;
 		relation5();
 		
-		std::cout << "Nastapi otworzenie grafu zależności plików" << std::endl;
+		std::cout << "Nastapi otworzenie grafu zaleznosci plikow" << std::endl;
 		char gp[50];
 		strcpy_s(gp, "graf_pliki.png");
 		system(gp);
