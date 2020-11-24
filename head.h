@@ -7,4 +7,6 @@ void relation2();
 void relation3();
 void relation4();
 void relation5();
+void file_nm();
+void file_fun();
 #endif
