@@ -292,3 +292,95 @@ void relation5()
 
 }
 
+
+void file_nm()
+	{
+		cout << "POLACZENIE PLIKI -> NAMESPACE" << endl;
+
+		map<string, vector<string>>fs_nm;
+		for (auto it = pliki.begin(); it != pliki.end(); it++) {
+			ifstream plik(*it);
+
+			while (!plik.eof()) {
+				string linijka;
+				getline(plik, linijka);
+				///cout << linijka << endl;
+
+				string szukany;
+					
+				size_t gdzie = linijka.find(szukany);
+
+
+				if (linijka.find("namespace") != string::npos && linijka.find("using") == string::npos && linijka.find("npos") == string::npos && linijka.find("cout") == string::npos && linijka.find("for") == string::npos && linijka.find("std") == string::npos && linijka.find("strcpy_s") == string::npos) {
+					gdzie += szukany.size();
+					string nazwa_pliku = linijka.substr(gdzie);
+					///cout << nazwa_pliku << endl;
+					fs_nm[*it].push_back(nazwa_pliku);
+				}
+			}
+
+		}
+		///map<string, vector<string>>::iterator cur;
+
+		for (auto i = fs_nm.begin(); i != fs_nm.end(); i++) {
+			cout << "Plik - namespace: " << endl;
+			if (i->first != "a.out") {
+				cout << i->first << "-> ";
+				for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+				{
+					cout << *ii << " ";
+				}
+
+			}
+			cout << endl;
+		}
+	}
+
+	void file_fun()
+	{
+		map<string, vector<string>>f_f;
+		cout << endl << "______________" << endl;
+		for (auto it = pliki.begin(); it != pliki.end(); it++) {
+			string funkcja;
+			ifstream plik(*it);
+
+			while (!plik.eof()) {
+				string linijka;
+				getline(plik, linijka);
+
+				///cout << linijka << endl;
+
+				string szukany;
+
+				size_t gdzie = linijka.find(szukany);
+
+
+				if ((linijka.find("(){") != string::npos || linijka.find("();") != string::npos) && linijka.find("for") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos)
+				{
+					gdzie = szukany.size();
+					string nazwa_pliku = linijka.substr(gdzie);
+					///cout << nazwa_pliku << endl;
+					f_f[*it].push_back(nazwa_pliku);
+				}
+
+
+			}
+		}
+
+		for (auto i = f_f.begin(); i != f_f.end(); i++) {
+			cout << "Plik - funkcja: " << endl;
+			if (i->first != "a.out") {
+				cout << i->first << "-> ";
+				for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+				{
+					cout << *ii << " ";
+				}
+
+			}
+			cout << endl;
+		}
+
+		
+	}
+
+
