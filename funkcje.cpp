@@ -113,8 +113,8 @@ void relation() {
 
 void relation2()
 	{
-		
-		map<string, vector<string>>mapa_nazw_funkcji;
+
+		map<string, vector<string>>mapa_deklaracji_funkcji;
 		cout << endl << "______________" << endl;
 		for (auto it = pliki.begin(); it != pliki.end(); it++) {
 			ifstream plik(*it);
@@ -129,18 +129,18 @@ void relation2()
 				size_t gdzie = linijka.find(szukany);
 
 
-				if (linijka.find(szukany) != string::npos || linijka.find(szukany1) != string::npos && linijka.find("string") == string::npos)
+				if ((linijka.find(szukany) != string::npos || linijka.find(szukany1) != string::npos) && linijka.find("string") == string::npos && linijka.find("if") == string::npos && linijka.find("for") == string::npos && linijka.find(";") == string::npos)
 				{
 					gdzie += szukany.size();
 					string nazwa_pliku = linijka.substr(gdzie);
 					///cout << nazwa_pliku << endl;
-					mapa_nazw_funkcji[*it].push_back(nazwa_pliku);
-					
+					mapa_deklaracji_funkcji[*it].push_back(nazwa_pliku);
+
 				}
 			}
 		}
 
-		for (auto i = mapa_nazw_funkcji.begin(); i != mapa_nazw_funkcji.end(); i++) {
+		for (auto i = mapa_deklaracji_funkcji.begin(); i != mapa_deklaracji_funkcji.end(); i++) {
 			cout << "Funkcje: " << endl;
 			if (i->first != "a.out") {
 				cout << i->first << ": ";
