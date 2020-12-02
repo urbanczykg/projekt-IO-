@@ -157,6 +157,8 @@ void relation2()
 void relation3()
 	{
 		map<string, vector<string>>mapa_pol_funkcji;
+		string nazwa_funkcji;
+
 		cout << endl << "______________" << endl;
 		for (auto it = pliki.begin(); it != pliki.end(); it++) {
 			string funkcja;
@@ -165,23 +167,32 @@ void relation3()
 			while (!plik.eof()) {
 				string linijka;
 				getline(plik, linijka);
-				
+
 				///cout << linijka << endl;
 
 				string szukany;
-				
+				string szukany1;
+
 				size_t gdzie = linijka.find(szukany);
+				size_t gdzie1 = linijka.find(szukany1);
+
+				if (linijka.find("int") != string::npos && linijka.find("(){") != string::npos)
+				{
+					gdzie1 = szukany.size();
+					nazwa_funkcji = linijka.substr(gdzie1);
+					
+				}
+					
+				if (linijka.find("();") != string::npos && linijka.find("for") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos)
+				{
+					gdzie = szukany.size();
+					string nazwa_pliku = linijka.substr(gdzie);
+					///cout << nazwa_pliku << endl;
+					mapa_pol_funkcji[nazwa_funkcji].push_back(nazwa_pliku);
+				}
 				
-				
-					if (linijka.find("();") != string::npos && linijka.find("for") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos)
-					{
-						gdzie = szukany.size();
-						string nazwa_pliku = linijka.substr(gdzie);
-						///cout << nazwa_pliku << endl;
-						mapa_pol_funkcji["main()"].push_back(nazwa_pliku);
-					}
-				
-				
+
+
 			}
 		}
 
@@ -197,19 +208,8 @@ void relation3()
 			}
 			cout << endl;
 		}
-
-		/*
-			Mat image;
-		image = imread("C:/Users/Gabriela/Desktop/studia/io/funkcja1/funkcja1/cpp(1).jpg"); // Read the file
-		if (image.empty()) // Check for invalid input
-		{
-			cout << "Could not open or find the image" << std::endl;
-		}
-		namedWindow("Display window"); // Create a window for display.
-		imshow("Display window", image); // Show our image inside it.
-		waitKey(0);
-		*/
 	}
+
 void relation5()
 {
 
