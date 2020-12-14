@@ -4,6 +4,7 @@
 #include<string>
 #include<map>
 #include "Functions.h"
+#include <gtest/gtest.h>
 
 	namespace fs = std::filesystem;
 
@@ -13,11 +14,12 @@
 	std::string path = "C:/Users/Michal/Desktop/AGH/3/IO/PROJEKT_1/IO/IO";
 	std::string ext(".cpp");
 	std::string exh(".h");
-	std::list<std::string>pliki;
+	list<string>pliki;
 	map<string, vector<string>>mapa_nazw_plikow_1;
 	map<string, vector<string>>mapa_deklaracji_funkcji_1;
 	map<string, vector<string>>mapa_pol_funkcji_1;
 	map<string, vector<string>>mapa_pol_namespace_1;
+	map<string, vector<string>>mapa_fs_nm;
 
 	
 
@@ -36,6 +38,8 @@
 				std::cout << "??    " << filenameStr << '\n';
 		}
 	}
+
+
 	template <class Path> typename Path::string_type extension(const Path& p);
 
 
@@ -54,14 +58,17 @@
 		cout << endl;
 		cout << "ZAWARTOSC PROJEKTU:" << endl;
 		cout << endl;
-		for (list<string>::iterator it = pliki.begin(); it != pliki.end(); it++)
+		for (auto it = pliki.begin(); it != pliki.end(); it++)
 		{
 			cout << *it << endl;
 			cout << endl;
 		}
-
 	}
 
+	TEST(Test_List, Czy_lista_zostaje_zapelniona)
+	{
+		ASSERT_TRUE(pliki.size() != 0);
+	}
 
 	void fun_3(){
 		map<string, vector<string>>mapa_nazw_plikow;
@@ -109,6 +116,11 @@
 		graph_making(mapa_nazw_plikow, name);
 		mapa_nazw_plikow_1 = mapa_nazw_plikow;
 
+	}
+
+	TEST(Test_Map, Test_1)
+	{
+		ASSERT_TRUE(mapa_nazw_plikow_1.size() != 0);
 	}
 
 
@@ -170,6 +182,11 @@
 		mapa_deklaracji_funkcji_1 = mapa_deklaracji_funkcji;
 	}
 
+	TEST(Test_Map, Test_2)
+	{
+		ASSERT_TRUE(mapa_deklaracji_funkcji_1.size() != 0);
+	}
+
 	
 
 	void relation3(){
@@ -191,7 +208,7 @@
 				size_t gdzie = linijka.find(szukany);
 				size_t gdzie1 = linijka.find(szukany1);
 
-				if ((linijka.find("int") != string::npos || linijka.find("void") != string::npos) && linijka.find("(){") != string::npos && linijka.find("if") == string::npos)
+				if ((linijka.find("int") != string::npos || linijka.find("void") != string::npos) && linijka.find("(") != string::npos && linijka.find("){") != string::npos && linijka.find("if") == string::npos)
 				{
 					gdzie1 = szukany.size();
 					nazwa_funkcji = linijka.substr(gdzie1);
@@ -213,7 +230,7 @@
 					
 				}
 					
-				if (linijka.find("(") != string::npos && linijka.find(");") != string::npos && linijka.find("for") == string::npos && linijka.find("std") == string::npos && linijka.find("return") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos && linijka.find("system") == string::npos && linijka.find("getline") == string::npos && linijka.find("template") == string::npos)
+				if (linijka.find("(") != string::npos && linijka.find(");") != string::npos && linijka.find("for") == string::npos && linijka.find("testing") == string::npos && linijka.find("std") == string::npos && linijka.find("return") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos && linijka.find("system") == string::npos && linijka.find("getline") == string::npos && linijka.find("template") == string::npos)
 				{
 					gdzie = szukany.size();
 					string nazwa_funkcji1 = linijka.substr(gdzie);
@@ -245,6 +262,11 @@
 
 		mapa_pol_funkcji_1 = mapa_pol_funkcji;
 		
+	}
+
+	TEST(Test_Map, Test_3)
+	{
+		ASSERT_TRUE(mapa_pol_funkcji_1.size() != 0);
 	}
 	
 
@@ -337,6 +359,11 @@
 
 	}
 
+	TEST(Test_Map, Test_4)
+	{
+		ASSERT_TRUE(mapa_pol_namespace_1.size() != 0);
+	}
+
 	void file_nm(){
 		cout << endl << "______________" << endl;
 		map<string, vector<string>>fs_nm;
@@ -385,6 +412,8 @@
 			cout << endl;
 		}
 
+		mapa_fs_nm = fs_nm;
+
 		std::string name1 = "graf_pliki_namespace.dot";
 		graf_making_2(fs_nm,mapa_pol_namespace_1, mapa_nazw_plikow_1, name1);
 
@@ -392,6 +421,10 @@
 		combined_graf_making(mapa_deklaracji_funkcji_1, mapa_pol_funkcji_1, fs_nm, mapa_pol_namespace_1, mapa_nazw_plikow_1, name2);
 	}
 
+	TEST(Test_Map, Test_5)
+	{
+		ASSERT_TRUE(mapa_fs_nm.size() != 0);
+	}
 	
 	
 
