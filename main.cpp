@@ -4,6 +4,9 @@
 #include <filesystem>
 #include <string>
 
+#include <gtest/gtest.h>
+
+
 
 	namespace pole_figur{
 
@@ -24,9 +27,12 @@
 	}
 
 
+	
 
-	int main(){
+
+	int main(int argc, char* argv[]){
 		
+	
 		list_of_files();
 		add_to_list();
 		fun_3();
@@ -34,14 +40,14 @@
 		relation3();
 		relation5();
 		file_nm();
-		
+
 
 		int x;
 
 		for (;;)
 		{
 			std::cout << std::endl;
-			std::cout << "Wybierz graf:" << std::endl;
+			std::cout << "Wybierz graf lub uruchom testy jednostkowe:" << std::endl;
 			std::cout << "Graf pliki - 1" << std::endl;
 			std::cout << "Graf funkcje - 2" << std::endl;
 			std::cout << "Graf namespace - 3" << std::endl;
@@ -49,12 +55,13 @@
 			std::cout << "Graf pliki-funkcje - 5" << std::endl;
 			std::cout << "Graf pliki-namespace - 6" << std::endl;
 			std::cout << "Graf pliki-funkcje-namespace - 7" << std::endl;
+			std::cout << "TESTY JEDNOSTKOWE - 8" << std::endl;
 			std::cin >> x;
 			
 			switch (x)
 			{
 			case 1:
-				std::cout << "Nastapi otworzenie grafu zależności plików" << std::endl;
+				std::cout << "Nastapi otworzenie grafu zaleznosci plikow" << std::endl;
 				char gp[50];
 				strcpy_s(gp, "nazwy_plikow.dot.png");
 				system(gp);
@@ -102,6 +109,10 @@
 				system(gpnf);
 				break;
 
+			case 8:
+				
+				testing::InitGoogleTest(&argc, argv);
+				return RUN_ALL_TESTS();
 
 			default:
 				break;
@@ -110,4 +121,6 @@
 
 		return 0;
 	}
+
+	
 
