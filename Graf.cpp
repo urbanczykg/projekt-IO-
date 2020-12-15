@@ -4,6 +4,13 @@
 #include<string>
 #include<map>
 #include "Functions.h"
+#include <gtest/gtest.h>
+
+std::string name_copy;
+std::string name_2_copy;
+std::string name_3_copy;
+
+
 
 void graph_making(std::map<std::string, std::vector<std::string>>l, std::string name)
 {
@@ -28,7 +35,36 @@ void graph_making(std::map<std::string, std::vector<std::string>>l, std::string 
 	char tab[100];
 	strcpy_s(tab, x.c_str());
 	system(tab);
+
+	name_copy = name;
 }
+
+TEST(Test_Plikow, Test_1)
+{
+	std::fstream file(name_copy, std::ios::in | std::ios::_Nocreate);
+	ASSERT_TRUE(file.is_open());
+	file.close();
+}
+
+TEST(Test_Plikow, Test_Zawartosci_1)
+{
+	std::fstream file(name_copy, std::ios::in | std::ios::_Nocreate);
+
+	while (!file.eof())
+	{
+		std::string linijka;
+		std::getline(file, linijka);
+
+		size_t znalezionaPozycja = linijka.find("->");
+
+
+		ASSERT_TRUE(znalezionaPozycja != 0); //istnienie -> w pliku
+		file.close();
+		
+	}
+}
+
+
 
 
 void combined_graf_making(std::map<std::string, std::vector<std::string>>l, std::map<std::string, std::vector<std::string>>x, std::map<std::string, std::vector<std::string>>a, std::map<std::string, std::vector<std::string>>b, std::map<std::string, std::vector<std::string>>h, std::string name)
@@ -103,6 +139,33 @@ void combined_graf_making(std::map<std::string, std::vector<std::string>>l, std:
 	char tab[100];
 	strcpy_s(tab, aa.c_str());
 	system(tab);
+
+	name_2_copy = name;
+}
+
+TEST(Test_Plikow, Test_2)
+{
+	std::fstream file(name_2_copy, std::ios::in | std::ios::_Nocreate);
+	ASSERT_TRUE(file.is_open());
+	file.close();
+}
+
+TEST(Test_Plikow, Test_Zawartosci_2)
+{
+	std::fstream file(name_2_copy, std::ios::in | std::ios::_Nocreate);
+
+	while (!file.eof())
+	{
+		std::string linijka;
+		std::getline(file, linijka);
+
+		size_t znalezionaPozycja = linijka.find("->");
+
+
+		ASSERT_TRUE(znalezionaPozycja != 0); //istnienie -> w pliku
+		file.close();
+
+	}
 }
 
 void graf_making_2(std::map<std::string, std::vector<std::string>>l, std::map<std::string, std::vector<std::string>>x, std::map<std::string, std::vector<std::string>>h, std::string name)
@@ -153,6 +216,33 @@ void graf_making_2(std::map<std::string, std::vector<std::string>>l, std::map<st
 	char tab[100];
 	strcpy_s(tab, a.c_str());
 	system(tab);
+
+	name_3_copy = name;
+}
+
+TEST(Test_Plikow, Test_3)
+{
+	std::fstream file(name_3_copy, std::ios::in | std::ios::_Nocreate);
+	ASSERT_TRUE(file.is_open());
+	file.close();
+}
+
+TEST(Test_Plikow, Test_Zawartosci_3)
+{
+	std::fstream file(name_3_copy, std::ios::in | std::ios::_Nocreate);
+
+	while (!file.eof())
+	{
+		std::string linijka;
+		std::getline(file, linijka);
+
+		size_t znalezionaPozycja = linijka.find("->");
+
+
+		ASSERT_TRUE(znalezionaPozycja != 0); //istnienie -> w pliku
+		file.close();
+
+	}
 }
 
 
