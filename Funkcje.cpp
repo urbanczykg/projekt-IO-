@@ -11,9 +11,9 @@
 	using namespace std;
 	
 
-	std::string path = "C:/Users/Michal/Desktop/AGH/3/IO/PROJEKT_1/IO/IO";
-	std::string ext(".cpp");
-	std::string exh(".h");
+	string path = "C:/Users/Michal/Desktop/AGH/3/IO/PROJEKT_1/IO/IO";
+	string ext(".cpp");
+	string exh(".h");
 	list<string>pliki;
 	map<string, vector<string>>mapa_nazw_plikow_1;
 	map<string, vector<string>>mapa_deklaracji_funkcji_1;
@@ -65,7 +65,7 @@
 		}
 	}
 
-	TEST(Test_List, Czy_lista_zostaje_zapelniona)
+	TEST(Test_List, Test_1)
 	{
 		ASSERT_TRUE(pliki.size() != 0);
 	}
@@ -84,7 +84,7 @@
 				size_t gdzie = linijka.find(szukany);
 
 
-				if (linijka.find("#include") != string::npos && linijka.find("<") == string::npos) {
+				if (linijka.find("#include") != string::npos && linijka.find("<") == string::npos && linijka.find("(") == string::npos) {
 					gdzie += szukany.size();
 					string nazwa_pliku = linijka.substr(gdzie);
 					
@@ -121,6 +121,22 @@
 	TEST(Test_Map, Test_1)
 	{
 		ASSERT_TRUE(mapa_nazw_plikow_1.size() != 0);
+	}
+
+	TEST(Test_Map, Test_Zawartosci_1)
+	{
+		int test = 0;
+		for (auto i = mapa_nazw_plikow_1.begin(); i != mapa_nazw_plikow_1.end(); i++) {
+			for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+			{
+				string g = *ii;
+				size_t szukane = g.find("#include");
+
+				if (szukane != std::string::npos) test = 1;
+			}
+		}
+		
+		ASSERT_TRUE(test == 0);
 	}
 
 
@@ -187,6 +203,25 @@
 		ASSERT_TRUE(mapa_deklaracji_funkcji_1.size() != 0);
 	}
 
+	TEST(Test_Map, Test_Zawartosci_2)
+	{
+		int test = 0;
+		for (auto i = mapa_deklaracji_funkcji_1.begin(); i != mapa_deklaracji_funkcji_1.end(); i++) {
+			for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+			{
+				string g = *ii;
+
+				size_t szukane_1 = g.find("void");
+				size_t szukane_2 = g.find("int");
+				size_t szukane_3 = g.find("(");
+
+				if (szukane_1 != std::string::npos || szukane_2 != std::string::npos || szukane_3 != std::string::npos) test = 1;
+			}
+		}
+
+		ASSERT_TRUE(test == 0);
+	}
+
 	
 
 	void relation3(){
@@ -230,7 +265,7 @@
 					
 				}
 					
-				if (linijka.find("(") != string::npos && linijka.find(");") != string::npos && linijka.find("for") == string::npos && linijka.find("testing") == string::npos && linijka.find("std") == string::npos && linijka.find("return") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos && linijka.find("system") == string::npos && linijka.find("getline") == string::npos && linijka.find("template") == string::npos)
+				if (linijka.find("(") != string::npos && linijka.find(");") != string::npos && linijka.find("for") == string::npos && linijka.find("testing") == string::npos && linijka.find("ASSERT_TRUE") == string::npos && linijka.find("std") == string::npos && linijka.find("return") == string::npos && linijka.find("while") == string::npos && linijka.find("if") == string::npos && linijka.find(".") == string::npos && linijka.find("void") == string::npos && linijka.find("system") == string::npos && linijka.find("getline") == string::npos && linijka.find("template") == string::npos)
 				{
 					gdzie = szukany.size();
 					string nazwa_funkcji1 = linijka.substr(gdzie);
@@ -268,7 +303,32 @@
 	{
 		ASSERT_TRUE(mapa_pol_funkcji_1.size() != 0);
 	}
-	
+
+	TEST(Test_Map, Test_Zawartosci_3)
+	{
+		int test = 0;
+		for (auto i = mapa_pol_funkcji_1.begin(); i != mapa_pol_funkcji_1.end(); i++) {
+
+			string x = i->first;
+
+			size_t szukane_1 = x.find("void");
+			size_t szukane_2 = x.find("int");
+			size_t szukane_3 = x.find("(");
+
+			if (szukane_1 != std::string::npos || szukane_2 != std::string::npos || szukane_3 != std::string::npos) test = 1;
+			
+			for (auto ii = i->second.begin(); ii != i->second.end(); ii++)
+			{
+				string g = *ii;
+
+				size_t szukane = g.find("(");
+
+				if (szukane != std::string::npos) test = 1;
+			}
+		}
+
+		ASSERT_TRUE(test == 0);
+	}
 
 	void relation5(){
 		map<string, vector<string>>mapa_pol_namespace;
@@ -364,6 +424,7 @@
 		ASSERT_TRUE(mapa_pol_namespace_1.size() != 0);
 	}
 
+	
 	void file_nm(){
 		cout << endl << "______________" << endl;
 		map<string, vector<string>>fs_nm;
@@ -425,6 +486,7 @@
 	{
 		ASSERT_TRUE(mapa_fs_nm.size() != 0);
 	}
+	
 	
 	
 
