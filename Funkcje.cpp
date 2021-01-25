@@ -137,7 +137,7 @@ void fun_3(){
 	}
 	
 	std::string name = "nazwy_plikow.dot";
-	graph_making(mapa_nazw_plikow, name, 0);
+	graph_making(mapa_nazw_plikow, name, 2);
 	mapa_nazw_plikow_1 = mapa_nazw_plikow;
 }
 
