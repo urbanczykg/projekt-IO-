@@ -165,6 +165,27 @@ void graph_making(std::map<std::string, std::vector<std::string>>l, std::string 
 
 	std::ofstream file(name);
 	file << "strict digraph \n{\n";
+	
+	if (o == 2)
+	{
+
+		file << "label = "<< "\""<<"LATEST COMMIT: " << commit_on_graph() << "\"" << "\n";
+
+
+
+		for (auto i = l.begin(); i != l.end(); ++i)
+		{
+			if (i->first != "a.out")
+			{
+				for (auto j = i->second.begin(); j != i->second.end(); ++j)
+				{
+					file << '"' << i->first << '"' << " -> " << '"' << *j << '"'
+						<< "\n";
+
+				}
+			}
+		}
+	}
 
 	if (o == 1)
 	{
@@ -406,6 +427,23 @@ void cc(){
 	{
 		func[i].cyclomatic_complexity(xxx[i]);
 	}
+}
+
+std::string commit_on_graph(){
+	
+	//wywolanie komendy wypisującej ostatni commit i zapisanie go w pliku output.txt
+	std::string command = "git log --pretty=%H -1 > C:Users\Michal\Desktop\AGH\3\IO\Projekt_1\IO\IO\output.txt";
+	char tab[100];
+	strcpy_s(tab, command.c_str());
+	system(tab);
+
+	//otworzenie pliku z commitem i zapisanie go do zmiennej
+	std::ifstream plik;
+	plik.open("output.txt");
+	std::string commit;
+	plik >> commit;
+
+	return commit;	
 }
 
 
