@@ -432,14 +432,14 @@ void cc(){
 std::string commit_on_graph(){
 	
 	//wywolanie komendy wypisującej ostatni commit i zapisanie go w pliku output.txt
-	std::string command = "git log --pretty=%H -1 > C:Users\Michal\Desktop\AGH\3\IO\Projekt_1\IO\IO\output.txt";
+	std::string command = "cd projekt-IO- & git log --pretty=%H -1 > output.txt";
 	char tab[100];
 	strcpy_s(tab, command.c_str());
 	system(tab);
 
 	//otworzenie pliku z commitem i zapisanie go do zmiennej
 	std::ifstream plik;
-	plik.open("output.txt");
+	plik.open("C:/Users/Michal/Desktop/AGH/3/IO/PROJEKT_1/IO/IO/projekt-IO-/output.txt");
 	std::string commit;
 	plik >> commit;
 
