@@ -25,6 +25,7 @@
 	struct node;
 	void push(node*& S, std::string n);
 	int check(node* S, std::string n);
+	std::string commit_on_graph();
 	
 	
 
