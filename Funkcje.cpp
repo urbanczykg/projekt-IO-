@@ -561,7 +561,20 @@ void file_nm(){
 	std::string name2 = "graf_pliki_funkcje_namespace.dot";
 	combined_graf_making(mapa_deklaracji_funkcji_1, mapa_pol_funkcji_1, fs_nm, mapa_pol_namespace_1, mapa_nazw_plikow_1, name2);
 }
-
+void commit(string file)
+{
+	array<char, 128> buffer;
+	string result;
+	string command;
+	command = "git log --preet=oneline" + file;
+	unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(command.c_str(), "r"), _pclose);
+	while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr)
+	{
+		result += buffer.data();
+		break;
+	}
+	return result.substr(0, result.find(" "));
+}
 TEST(Test_Map, Test_5)
 {
 	ASSERT_TRUE(mapa_fs_nm.size() != 0);
