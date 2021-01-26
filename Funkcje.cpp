@@ -80,12 +80,6 @@ void add_to_list(){
 		cout << endl;
 	}
 }
-
-TEST(Test_List, Test_1)
-{
-	ASSERT_TRUE(pliki.size() != 0);
-}
-
 void fun_3(){
 
 	map<string, vector<string>>mapa_nazw_plikow;
@@ -140,6 +134,12 @@ void fun_3(){
 	graph_making(mapa_nazw_plikow, name, 2);
 	mapa_nazw_plikow_1 = mapa_nazw_plikow;
 }
+
+TEST(Test_List, Test_1)
+{
+	ASSERT_TRUE(pliki.size() != 0);
+}
+
 
 TEST(Test_Map, Test_1)
 {
