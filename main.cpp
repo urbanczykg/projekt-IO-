@@ -6,23 +6,7 @@
 #include <gtest/gtest.h>
 
 
-namespace pole_figur{
 
-	double kolo(const double PI, short r)
-	{
-	return(PI * r * r);
-	}
-}
-
-namespace algorytm{
-
-	using namespace pole_figur;
-
-	void liczba()
-	{
-	std::cout << 2.0 * kolo(3, 4);
-	}
-}
 
 
 int main(int argc, char* argv[]){
